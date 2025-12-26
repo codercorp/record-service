@@ -1,0 +1,4 @@
+com\example\record\RecordserviceApplication.class
+com\example\record\repo\ServiceRecordRepository.class
+com\example\record\controller\ServiceRecordController.class
+com\example\record\model\ServiceRecord.class

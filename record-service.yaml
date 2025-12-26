@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: record-service
+  namespace: automotive
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: record-service
+  template:
+    metadata:
+      labels:
+        app: record-service
+    spec:
+      containers:
+        - name: record-service
+          image: erdigvijay/devops_repo:record-service-latest
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://admin:admin123@mongo:27017/recorddb?authSource=admin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: record-service
+  namespace: automotive
+spec:
+  selector:
+    app: record-service
+  ports:
+    - port: 8083
+      targetPort: 8083
